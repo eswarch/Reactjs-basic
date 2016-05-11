@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>React Routing</title>
+	</head>
+
+	<body>
+		<div id="app">Hellow</div>
+	</body>
+
+	<script src="./lib/react.js"></script>
+	<script src="./lib/react-dom.js"></script>
+	<script src="./lib/ReactRouter.js"></script>
+	<script src="./lib/browser.js"></script>
+	<script type="text/babel">
+
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var Link = ReactRouter.Link;
+var IndexRoute = ReactRouter.IndexRoute;
+var hashHistory =  ReactRouter.hashHistory;
+var browserHistory =  ReactRouter.browserHistory;
+
+// home page
+
+
+var Index = React.createClass({
+    render:function(){
+        return (<h2>Home Page</h2>)
+    }
+});
+
+//header
+
+
+var Header = React.createClass({
+    render:function(){
+        return (
+            <div>
+                <h1>React Routing</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><Link to="/">Home</Link></td>
+                            <td><Link to="/about">About</Link></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr/>
+            </div>
+        );
+    }
+});
+
+
+
+//creating app compo
+
+		
+var App = React.createClass({
+    render:function(){
+       return (
+            <div>
+                <Header/>
+                <div>
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
+});
+
+//about
+
+var About = React.createClass({
+    render:function(){
+        return (<h1>About Page</h1>);
+    }
+});
+// error
+
+
+var Error = React.createClass({
+    render:function(){
+        return (
+            <h1>Page Not Found</h1>
+        );
+    }
+});
+
+// maping to app
+
+ReactDOM.render(  
+    <Router history={browserHistory}>
+        <Route path="/" component={App}>
+        <IndexRoute component={Index}/>
+        <Route path="about" component={About}/>
+        <Route path="*" component={Error}/>
+         </Route>
+    </Router>, document.getElementById('app'));
+
+
+	</script>
+
+</html>
